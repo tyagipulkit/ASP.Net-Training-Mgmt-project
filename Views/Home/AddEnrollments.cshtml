@@ -1,0 +1,129 @@
+﻿@model EnrollModel
+﻿@{
+    ViewData["Title"] = "Add Enrollment";
+    var TrainingData = ViewData["TrainingData"] as List<TrainingModel>;
+    var Trainers = ViewData["Trainers"] as List<UserModel>;
+    var Users = ViewData["Users"] as List<UserModel>;
+}
+<h1 class="text-center">@ViewData["Title"]</h1>
+@if (ViewBag.doneEnroll == true)
+{
+    <div class="alert alert-success text-center" role="alert">
+        <h4 class="alert-heading">Enrollment Successful!</h4>            
+    </div>
+}
+
+<div class="container mt-5">
+    
+    <div class="row d-flex justify-content-center">
+        
+        <div class="col-md-6">
+            <div class="card px-5 py-5">
+
+
+
+                <form method="post" asp-action="EnrollTrainer" asp-controller="Home">
+                    <div class="form-group text-center ">
+                                <label class="sm-7 col-form-label"><em><strong>Select Training</strong></em></label>
+
+                         <div class="sm-5">
+
+                            <select asp-for="TrainId" class="form-control">
+                                @if (TrainingData != null)
+                                {
+                                    foreach (var T in TrainingData)
+                                    {
+                                        <option value="@T.Tid">#@T.Tid @T.TrainingName (@T.TrainingStatus)</option>
+                                    }
+                                }
+                            </select>
+
+                         </div>
+                     </div>
+
+                     <div class="form-group text-center ">
+
+                        <label class="sm-7 col-form-label"><em><strong>Select Trainer</strong></em></label>
+
+                            <div class="sm-5">
+
+                            <select asp-for="UserId" class="form-control">
+                                @if (Trainers != null)
+                                {
+                                @foreach (var U in Trainers)
+                                     {
+                                    <option value="@U.Uid">#@U.Uid @U.FName @U.LName (@U.Email)</option>
+                                      }
+                               }
+                            </select>
+
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                                  <button type="submit" class="btn btn-primary text-center">Add Trainer</button>
+                        </div>
+                 
+            </form>
+                    
+
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card px-5 py-5">
+
+
+
+
+                <form method="post" asp-action="EnrollTrainee" asp-controller="Home">
+                    <div class="form-group text-center ">
+                        <label class="sm-7 col-form-label"><em><strong>Select Training</strong></em></label>
+
+                        <div class="sm-5">
+
+                            <select asp-for="TrainId" class="form-control">
+                                @if (TrainingData != null)
+                                {
+                                    foreach (var T in TrainingData)
+                                    {
+                                        <option value="@T.Tid">#@T.Tid @T.TrainingName (@T.TrainingStatus)</option>
+                                    }
+                                }
+                            </select>
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center ">
+
+                        <label class="sm-7 col-form-label"><em><strong>Select Trainee(Any User)</strong></em></label>
+
+                        <div class="sm-5">
+
+                            <select asp-for="UserId" class="form-control">
+                                @if (Users != null)
+                                {
+                                    @foreach (var U in Users)
+                                    {
+                                        <option value="@U.Uid">#@U.Uid @U.FName @U.LName (@U.Email) {@U.Role}</option>
+                                    }
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary text-center">Add Student</button>
+                    </div>
+
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

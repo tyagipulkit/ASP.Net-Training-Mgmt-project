@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TrainingModel>
+
+@{
+    ViewData["Title"] = "View All Trainings";
+}
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Training ID</th>
+            <th scope="col">Training Name</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Department</th>
+            <th scope="col">Modes</th>
+            <th scope="col">Status</th>
+            <th scope="col">Goto Training</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model)
+        {
+            <tr>
+                <td>@t.Tid</td>
+                <td>@t.TrainingName</td>
+                <td>@t.CreatedDate</td>
+                <td>@t.Department</td>
+                <td>@t.TrainingModes</td>
+                <td>@t.TrainingStatus</td>
+                <td>
+                    <a class="text-dark" href="@Url.Action("TrainingDashboard","Home",new{@Tid = t.Tid})">
+                            <button type="button" class="btn btn-primary" style="width: 120px;">DashBoard</button>
+                        </a
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

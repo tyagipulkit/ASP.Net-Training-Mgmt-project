@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewData["Title"] = "View Enrollments";
+}
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+
+@foreach (TrainingModel T in ViewBag.TrainingData){
+    <h5 class="text-center">Training Name - @T.TrainingName (ID# - @T.Tid)</h5>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+              <th scope="col">User ID</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Roles</th>
+              <th scope="col">Delete Enrollment</th>
+
+            </tr>
+        </thead>
+    <tbody>
+            @{
+                List<EnrollModel> Enroll = ViewBag.EnrollData;
+                var filteredUids = from E in Enroll
+                                   where E.TrainId == T.Tid
+                                   select E.UserId;
+                List<UserModel> Temp = ViewBag.UserData;
+                var Tempusers1 = from user in Temp
+                                where filteredUids.Contains(user.Uid) && user.Role == Roles.Admin select user;
+                List<UserModel> users1 = Tempusers1.ToList<UserModel>();
+            }
+            @foreach (UserModel u in users1)
+            {
+                <tr class="table-danger">
+                <td>@u.Uid</td>
+                <td>@u.FName</td>
+                <td>@u.Email</td>
+                <td>@u.Role</td>
+                    <td>
+                        <a class="text-dark" href="@Url.Action("DeleteEnrollments","Home",new{@Uid = u.Uid,@Tid = @T.Tid})">
+                            <button type="button" class="btn btn-danger" style="width: 120px;">Delete</button>
+                        </a>
+                    </td>
+            </tr>
+        }
+
+
+         @{  
+            var Tempusers2 = from user in Temp where filteredUids.Contains(user.Uid) && user.Role == Roles.Trainer select user;
+            List <UserModel>users2 = Tempusers2.ToList<UserModel>();
+                    }
+                    @foreach (UserModel u in users2)
+                    {
+                        <tr class="table-warning">
+                            <td>@u.Uid</td>
+                            <td>@u.FName</td>
+                            <td>@u.Email</td>
+                            <td>@u.Role</td>
+                    <td>
+                        <a class="text-dark" href="@Url.Action("DeleteEnrollments","Home",new{@Uid = u.Uid,@Tid = @T.Tid})">
+                            <button type="button" class="btn btn-danger" style="width: 120px;">Delete</button>
+                        </a>
+                    </td>
+                        </tr>
+                    }
+            @{
+                var Tempusers3 = from user in Temp where filteredUids.Contains(user.Uid) && user.Role == Roles.Trainee select user;
+                List<UserModel> users3 = Tempusers3.ToList<UserModel>();
+            }
+            @foreach (UserModel u in users3)
+            {
+                <tr class="table-success">
+                    <td>@u.Uid</td>
+                    <td>@u.FName</td>
+                    <td>@u.Email</td>
+                    <td>@u.Role</td>
+                    <td>
+                        <a class="text-dark" href="@Url.Action("DeleteEnrollments","Home",new{@Uid = u.Uid,@Tid = @T.Tid})">
+                            <button type="button" class="btn btn-danger" style="width: 120px;">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+            }
+
+
+
+    </tbody>
+</table>
+<br>
+<br>
+
+}

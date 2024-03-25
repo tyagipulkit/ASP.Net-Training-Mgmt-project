@@ -1,0 +1,64 @@
+﻿@model TrainingModel
+@{
+    ViewData["Title"] = "Edit Training Details";
+
+    TrainingModel training = ViewBag.UserDetails;
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<form method="post" asp-action="EditTraining" asp-controller="Home">
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Training ID</label>
+        <div class="col-sm-10">
+            <input asp-for="Tid" value="@training.Tid" class="form-control" placeholder="Training ID" readonly>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="Email" class="col-sm-2 col-form-label">Training Name</label>
+        <div class="col-sm-10">
+            <input asp-for="TrainingName" value="@training.TrainingName" class="form-control" placeholder="Training Name" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="Email" class="col-sm-2 col-form-label">Training Department</label>
+        <div class="col-sm-10">
+            <input asp-for="Department" value="@training.Department" class="form-control" placeholder="Department" required>
+        </div>
+    </div>
+
+
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Training Modes</label>
+        <div class="col-sm-10">
+            <select asp-for="TrainingModes" class="form-control">
+                <option>Online</option>
+                <option>Offline</option>
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Training Status</label>
+        <div class="col-sm-10">
+            <select asp-for="TrainingStatus" class="form-control">
+                <option>YetToStart</option>
+                <option>Scheduled</option>
+                <option>In_Progress</option>
+                <option>Assessment</option>
+                <option>Feedback</option>
+
+
+            </select>
+        </div>
+    </div>
+
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary text-center">Confirm Edits</button>
+    </div>
+
+
+</form>

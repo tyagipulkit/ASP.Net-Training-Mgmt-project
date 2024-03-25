@@ -1,0 +1,97 @@
+﻿﻿@{
+    ViewData["Title"] = "User Dashboard";
+    UserModel user = ViewBag.UserDetails;
+    List <TrainingModel> TrainingData = ViewBag.TrainingData;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome @ViewBag.UserName </h1>
+
+</div>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">User Dashboard</h1>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">User Details</h5>
+                    <p class="card-text"><strong>User ID:</strong> @user.Uid</p>
+                    <p class="card-text"><strong>Name:</strong> @user.FName @user.LName</p>
+                    <p class="card-text"><strong>Email:</strong> @user.Email</p>
+                    <p class="card-text"><strong>Role:</strong> @user.Role</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Irrerversable Action:</h5>
+                    <p class="card-text" style="width: 150px;"><strong>Edit User Details:</strong> 
+                        <a class="text-dark" href="@Url.Action("EditUserPage","Home",new{@Uid = user.Uid})">
+                            <button type="button" class="btn btn-primary" style="width: 120px;">Edit #@user.Uid</button>
+                        </a>
+                        </p>
+                    <p class="card-text" style="width: 150px;"><strong>Delete User:</strong> 
+                       <a class="text-dark" href="@Url.Action("DeleteUser","Home",new{@Uid = user.Uid})">
+                            <button type="button" class="btn btn-primary" style="width: 120px;">Delete #@user.Uid</button>
+                        </a>
+                        </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Training Details</h5>
+                    <table class="table">
+                        <thead>
+                            
+                            <tr>
+                                <th>Training ID</th>
+                                <th>Name</th>
+                                <th>CreatedDate</th>
+                                <th>Department</th>
+                                <th>Modes</th>
+                                <th>Status</th>
+                                <th>Goto </th>
+                             </tr>
+                            
+                        </thead>
+                        <tbody>
+                            @if(TrainingData.Count()>0)
+                            {
+                                <p> (Order by - Training Status)</p>
+                                  @foreach (TrainingModel T in TrainingData)
+                                         {
+                                              <tr>
+                                                     <td>@T.Tid</td>
+                                                     <td>@T.TrainingName </td>
+                                                     <td>@T.CreatedDate</td>
+                                                     <td>@T.Department</td>
+                                                     <td>@T.TrainingModes</td>
+                                                     <td>@T.TrainingStatus</td>
+                                                     <td>
+                                                         <a class="text-dark" href="@Url.Action("TrainingDashboard","Home",new{@Tid = T.Tid})">
+                                                                 <button type="button" class="btn btn-primary" style="width: 120px;">DashBoard</button>
+                                                         </a
+                                                     </td>
+                                                    
+                                              </tr>
+                                }
+                            }
+                            else
+                            {
+                                <p> User not Enrolled in any Training Program.</p>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

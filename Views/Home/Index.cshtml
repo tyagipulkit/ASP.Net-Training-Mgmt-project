@@ -1,0 +1,30 @@
+﻿﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+
+    @if (ViewBag.loginFailed == 0)
+    {
+        <div class="alert alert-success text-center" role="alert">
+            <h4 class="alert-heading">Login Successful!</h4>           
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <p>Welcome @(ViewBag.FName + " " + ViewBag.LName) (@ViewBag.UserName)</p>
+            <p>
+                <a class="text-dark" href="@Url.Action("UserDashboard","Home",new{@Uid = ViewBag.UserID})">
+                            <button type="button" class="btn btn-primary" style="width: 120px;">DashBoard</button>
+             </a>
+             </p>
+        </div>
+    }   
+    <h4>Training Tacker MVC Website </h4>
+    <h6>| Build By- Pulkit tyagi |</h6>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">Web apps with ASP.NET Core</a>.</p>
+        <div>
+            <img src="https://cache.careers360.mobi/media/article_images/2023/12/12/fmge-2022.webp" class="img-fluid" alt="Responsive image">
+        </div>
+</div>

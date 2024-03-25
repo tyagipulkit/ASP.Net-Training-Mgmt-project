@@ -1,0 +1,20 @@
+﻿﻿@{
+    ViewData["Title"] = "Access Blocked";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Access Restricted!!</h1>
+    <h3>
+        The user lacks the necessary permissions to access the requested action. Please contact the site administrator for further details.
+
+    </h3>
+    <p>
+        <a class="text-dark" href="@Url.Action("Index","Home")">
+            <button type="button" class="btn btn-primary" style="width: 120px;">Home</button>
+        </a>
+        <a class="text-dark" href="@Url.Action("UserDashboard","Home",new{@Uid = ViewBag.UserID})">
+            <button type="button" class="btn btn-primary" style="width: 120px;">DashBoard</button>
+        </a>
+    </p>
+    
+</div>

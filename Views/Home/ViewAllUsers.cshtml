@@ -1,0 +1,39 @@
+﻿@model IEnumerable<UserModel>
+
+@{
+    ViewData["Title"] = "View All Users";
+}
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Goto User</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.Uid</td>
+                <td>@(u.FName + " " +u.LName)</td>
+                <td>@u.Email</td>
+                <td>@u.Role</td>
+                <td>
+                    <a class="text-dark" href="@Url.Action("UserDashboard","Home",new{@Uid = u.Uid})">
+                            <button type="button" class="btn btn-primary" style="width: 120px;">DashBoard</button>
+                        </a
+                </td>
+
+            </tr>
+        }
+        
+    </tbody>
+</table>

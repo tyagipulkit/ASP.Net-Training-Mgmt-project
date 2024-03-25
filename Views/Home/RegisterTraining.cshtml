@@ -1,0 +1,56 @@
+﻿@model TrainingModel
+@{
+    ViewData["Title"] = "Add a New Training";
+}
+
+<h2 class="text-center">Register Training</h2>
+<form method="post" asp-action="AddNewTraining" asp-controller="Home">
+    
+    <div class="form-group row">
+        <label for="Email" class="col-sm-2 col-form-label">Training Name</label>
+        <div class="col-sm-10">
+            <input asp-for="TrainingName" class="form-control" placeholder="Training Name" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="Email" class="col-sm-2 col-form-label">Training Department</label>
+        <div class="col-sm-10">
+            <input asp-for="Department" class="form-control" placeholder="Department" required>
+        </div>
+    </div>
+    
+    
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Training Modes</label>
+        <div class="col-sm-10">
+            <select asp-for="TrainingModes" class="form-control">
+                <option>Online</option>
+                <option>Offline</option>
+                
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Training Status</label>
+        <div class="col-sm-10">
+            <select asp-for="TrainingStatus" class="form-control">
+                <option>YetToStart</option>
+                <option>Scheduled</option>
+                <option>In_Progress</option>
+                <option>Assessment</option>
+                <option>Feedback</option>
+                
+
+            </select>
+        </div>
+    </div>
+
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary text-center">Add to DataBase</button>
+    </div>
+
+
+</form>
